@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="general_preferences"
+    android:title="@string/settings">
+
+    <PreferenceScreen
+        android:fragment="com.gaganag50.myapplication.VideoAudioSettingsFragment"
+        android:icon="?attr/audio"
+        android:title="@string/settings_category_video_audio_title"/>
+
+    <PreferenceScreen
+        android:fragment="com.gaganag50.myapplication.DownloadSettingsFragment"
+        android:icon="?attr/download"
+        android:title="@string/settings_category_downloads_title"/>
+
+    <PreferenceScreen
+        android:fragment="com.gaganag50.myapplication.AppearanceSettingsFragment"
+        android:icon="?attr/palette"
+        android:title="@string/settings_category_appearance_title"/>
+
+    <PreferenceScreen
+        android:fragment="com.gaganag50.myapplication.HistorySettingsFragment"
+        android:icon="?attr/history"
+        android:title="@string/settings_category_history_title"/>
+
+    <PreferenceScreen
+        android:fragment="com.gaganag50.myapplication.ContentSettingsFragment"
+        android:icon="?attr/language"
+        android:title="@string/content"/>
+
+    <PreferenceScreen
+        android:fragment="com.gaganag50.myapplication.DebugSettingsFragment"
+        android:icon="?attr/bug"
+        android:title="@string/settings_category_debug_title"
+        android:key="@string/debug_pref_screen_key"/>
+</PreferenceScreen>

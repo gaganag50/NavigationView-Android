@@ -4,4 +4,107 @@
     <string name="slideshow">slideshow</string>
     <string name="tools">tools</string>
     <string name="Import">import</string>
+    <string name="tab_subscriptions">Subscriptions</string>
+    <string name="fragment_whats_new">What\'s New</string>
+    <string name="tab_bookmarks">Bookmarked Playlists</string>
+    <string name="downloads">Downloads</string>
+    <string name="action_history">History</string>
+    <string name="settings">Settings</string>
+    <string name="tab_about">About</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="all">All</string>
+    <string name="videos">Videos</string>
+    <string name="channels">Channel</string>
+    <string name="playlists">Playlists</string>
+    <string name="tracks">Tracks</string>
+    <string name="users">Users</string>
+    <string name="default_theme_value" translatable="false">@string/dark_theme_key</string>
+    <string name="light_theme_key" translatable="false">light_theme</string>
+    <string name="dark_theme_key" translatable="false">dark_theme</string>
+    <string name="black_theme_key" translatable="false">black_theme</string>
+    <string name="light_theme_title">Light</string>
+    <string name="dark_theme_title">Dark</string>
+    <string name="black_theme_title">Black</string>
+    <string name="theme_key">theme</string>
+    <string name="theme_title">Theme</string>
+    <string name="show_next_video_key">show_next_video</string>
+    <string name="show_next_and_similar_title">Show \'Next\' and \'Similar\' videos</string>
+    <string name="show_hold_to_append_key">show_hold_to_append</string>
+    <string name="show_hold_to_append_title">Show \"Hold to append\" tip</string>
+    <string name="show_hold_to_append_summary">Show tip when background or popup button</string>
+    <string name="list_view_mode_value">auto</string>
+    <string name="auto">Auto</string>
+    <string name="list">List</string>
+    <string name="grid">Grid</string>
+    <string name="list_view_mode_key">list_view_mode</string>
+    <string name="list_view_mode">List view mode</string>
+    <string name="caption_settings_key">caption_settings_key</string>
+    <string name="caption_setting_title">Captions</string>
+    <string name="caption_setting_description">Modify player caption text scale and background styles. Requires app restart to take effect.</string>
+    <string name="main_page_content_summary">What tabs are shown on the main page</string>
+    <string name="main_page_content">Content of main page</string>
+    <string name="main_page_content_key">main_page_content</string>
+    <string name="error_snackbar_message">Sorry, some errors occured</string>
+    <string name="error_snackbar_action">REPORT</string>
+    <string name="search">Search</string>
+    <string name="msg_popup_permission">This permission is needed to\\nopen in popup mode</string>
+    <string name="content">Content</string>
+    <string name="default_country_value">GB</string>
+    <string name="content_country_key">content_country</string>
+    <string name="default_content_country_title">Default content country</string>
+    <string name="default_language_value">en</string>
+    <string name="content_language_title">Default content language</string>
+    <string name="show_age_restricted_content">show_age_restricted_content</string>
+    <string name="show_age_restricted_content_title">Age restricted content</string>
+    <string name="show_search_suggestions_key">show_search_suggestions</string>
+    <string name="show_search_suggestions_summary">Show suggestions when searching</string>
+    <string name="show_search_suggestions_title">Show suggestions</string>
+    <string name="export_data_title">Export database</string>
+    <string name="export_data">export_data</string>
+    <string name="export_data_summary">Export history, subscriptions and playlists</string>
+    <string name="import_data_title">Import database</string>
+    <string name="import_data">import_data</string>
+    <string name="download_thumbnail_summary">When off no thumnails load, saving data and memory usage</string>
+    <string name="download_thumbnail_key">download_thumnail_key</string>
+    <string name="download_thumbnail_title">Load thumbnails</string>
+    <string name="import_data_summary">Overrides your current history and subscriptions</string>
+    <string name="content_language_key">content_language</string>
+    <string-array name="theme_description_list" translatable="false">
+        <item>@string/light_theme_title</item>
+        <item>@string/dark_theme_title</item>
+        <item>@string/black_theme_title</item>
+    </string-array>
+    <string-array name="theme_values_list" translatable="false">
+        <item>@string/light_theme_key</item>
+        <item>@string/dark_theme_key</item>
+        <item>@string/black_theme_key</item>
+    </string-array>
+
+
+
+    <string-array name="list_view_mode_values" translatable="false">
+        <item>auto</item>
+        <item>list</item>
+        <item>grid</item>
+    </string-array>
+    <string-array name="list_view_mode_description" translatable="false">
+        <item>@string/auto</item>
+        <item>@string/list</item>
+        <item>@string/grid</item>
+    </string-array>
+    <string name="settings_category_video_audio_title">Video &amp; audio</string>
+    <string name="settings_category_downloads_title">Download</string>
+    <string name="settings_category_appearance_title">Appearance</string>
+    <string name="settings_category_history_title">History &amp; cache</string>
+    <string name="debug_pref_screen_key" translatable="false">debug_pref_screen_key</string>
+    <string name="settings_category_debug_title">Debug</string>
+
+
+    <string name="current_service_key" translatable="false">service</string>
+    <string name="default_service_value" translatable="false">@string/youtube</string>
+<string name="youtube">youtube</string>
+    <string name="app_ui_crash">App/Ui crashed</string>
+
+
 </resources>
