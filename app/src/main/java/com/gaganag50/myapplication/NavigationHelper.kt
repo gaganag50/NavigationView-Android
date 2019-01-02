@@ -32,6 +32,7 @@ class NavigationHelper {
         }
 
         fun openSettings(context: Context) {
+//            SettingsActivity.initSettings(context)
             val intent = Intent(context, SettingsActivity::class.java)
             context.startActivity(intent)
         }
@@ -72,13 +73,11 @@ class NavigationHelper {
                 .commit()
         }
 
-        fun openMainActivity(activity: MainActivity): Boolean {
-            if (!PermissionHelper.checkStoragePermissions(activity, PermissionHelper.DOWNLOADS_REQUEST_CODE)) {
-                return false
-            }
-            val intent = Intent(activity, DownloadActivity::class.java)
-            activity.startActivity(intent)
-            return true
+        fun openMainActivity(context: Context) {
+            val mIntent = Intent(context, MainActivity::class.java)
+            mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            context.startActivity(mIntent)
         }
 
         fun tryGotoSearchFragment(fragmentManager: FragmentManager?): Any {

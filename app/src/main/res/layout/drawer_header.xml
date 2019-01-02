@@ -4,6 +4,7 @@
                 android:layout_height="150dp"
                 android:clickable="true"
                 android:focusable="true">
+
     <Button
             android:id="@+id/drawer_header_action_button"
             android:layout_width="match_parent"
@@ -26,7 +27,7 @@
 
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/np_logo_nude_shadow"
             android:contentDescription="TODO" />
 
     <TextView
@@ -54,6 +55,7 @@
             android:textSize="18sp"
             android:textColor="@color/drawer_header_font_color"
             android:textStyle="italic"/>
+
     <ImageView
             android:id="@+id/drawer_arrow"
             android:layout_width="30dp"

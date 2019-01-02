@@ -1,21 +1,22 @@
 package com.gaganag50.myapplication
 
-import android.content.pm.PackageManager
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.preference.PreferenceManager
 import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.*
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
@@ -27,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     private var drawer: DrawerLayout? = null
     private var drawerItems: NavigationView? = null
-    private lateinit var mDrawerLayout: DrawerLayout
 
 
     private var serviceArrow: ImageView? = null
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (DEBUG) Log.d(TAG, "onCreate() called with: savedInstanceState = [$savedInstanceState]")
-//        ThemeHelper.setTheme(this, ServiceHelper.getSelectedServiceId(this))
+        ThemeHelper.setTheme(this, -1)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -159,8 +159,7 @@ class MainActivity : AppCompatActivity() {
 
         serviceArrow = hView.findViewById(R.id.drawer_arrow)
         headerServiceView = hView.findViewById(R.id.drawer_header_service_view)
-        val action: Button = hView.findViewById(R.id.drawer_header_action_button)
-        action.setOnClickListener({ view -> toggleServices() })
+
     }
 
     private fun toggleServices() {
@@ -192,6 +191,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //
     override fun onBackPressed() {
         Log.d(TAG, "onBackPressed() called")
 
@@ -208,21 +208,32 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        for (i in grantResults) {
-            if (i == PackageManager.PERMISSION_DENIED) {
+    override fun onNewIntent(intent: Intent?) {
+        if (DEBUG) Log.d(TAG, "onNewIntent() called with: intent = [$intent]")
+        if (intent != null) {
+            // Return if launched from a launcher (e.g. Nova Launcher, Pixel Launcher ...)
+            // to not destroy the already created backstack
+            val action = intent.action
+            if (action != null && action == Intent.ACTION_MAIN && intent.hasCategory(Intent.CATEGORY_LAUNCHER))
                 return
-            }
         }
-        when (requestCode) {
-            PermissionHelper.DOWNLOADS_REQUEST_CODE -> NavigationHelper.openDownloads(this)
-            PermissionHelper.DOWNLOAD_DIALOG_REQUEST_CODE -> {
-                val fragment = supportFragmentManager.findFragmentById(R.id.fragment_holder)
-                if (fragment is VideoDetailFragment) {
-                    Log.d(TAG, ": VideoDetailFragment is called ")
-                }
-            }
+
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleIntent(intent)
+    }
+
+    private fun handleIntent(intent: Intent?) {
+        try {
+            if (DEBUG) Log.d(TAG, "handleIntent() called with: intent = [$intent]")
+
+
+            NavigationHelper.gotoMainFragment(supportFragmentManager)
+
+        } catch (e: Exception) {
+            ErrorActivity.reportUiError(this, e)
         }
+
     }
 
     private fun onHomeButtonPressed() {
@@ -240,9 +251,13 @@ class MainActivity : AppCompatActivity() {
 
         val fragment = supportFragmentManager.findFragmentById(R.id.fragment_holder)
         if (fragment !is VideoDetailFragment) {
-            val viewById = findViewById<Toolbar>(R.id.toolbar).findViewById<View>(R.id.toolbar_search_container)
+            findViewById<Toolbar>(R.id.toolbar).findViewById<View>(R.id.toolbar_spinner).setVisibility(View.GONE)
+        }
+        if (fragment !is VideoDetailFragment) {
 
             findViewById<Toolbar>(R.id.toolbar).findViewById<View>(R.id.toolbar_spinner).setVisibility(View.GONE)
+            val inflater = menuInflater
+            inflater.inflate(R.menu.main_menu, menu)
         }
 
 
@@ -261,19 +276,15 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
 
-        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_holder)
-//        if (fragment is MainFragment) {
-//            supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-//            if (toggle != null) {
-//                toggle.syncState()
-//                toolbar.setNavigationOnClickListener({ v -> drawer.openDrawer(GravityCompat.START) })
-//                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED)
-//            }
-//        } else {
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener({ v -> onHomeButtonPressed() })
-//        }
+
+        Log.d(TAG, "updateDrawerNavigation: MainFragment")
+        supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        if (toggle != null) {
+            toggle!!.syncState()
+            toolbar.setNavigationOnClickListener { v -> drawer.openDrawer(GravityCompat.START) }
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED)
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -281,10 +292,7 @@ class MainActivity : AppCompatActivity() {
         val id = item.itemId
 
         when (id) {
-            android.R.id.home -> {
-                onHomeButtonPressed()
-                return true
-            }
+
             R.id.action_show_downloads -> return NavigationHelper.openDownloads(this)
             R.id.action_history -> {
                 NavigationHelper.openStatisticFragment(supportFragmentManager)

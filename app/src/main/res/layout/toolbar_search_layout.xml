@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="?attr/colorPrimary">
 
     <EditText
@@ -15,7 +16,8 @@
             android:layout_marginRight="48dp"
             android:layout_marginTop="4dp"
             android:background="?attr/colorPrimary"
-            android:drawableLeft="?attr/search"
+            android:drawableLeft="@drawable/ic_search_white_24dp"
+
             android:drawablePadding="8dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -24,6 +26,9 @@
             android:inputType="textFilter|textNoSuggestions"
             android:maxLines="1"
             tools:ignore="RtlHardcoded"/>
+
+    <!--[package:]type/name-->
+    <!--android:drawableLeft="?attr/search"-->
 
     <FrameLayout
             android:id="@+id/toolbar_search_clear"
@@ -44,8 +49,11 @@
                 android:layout_gravity="center"
                 android:contentDescription="@string/search"
                 android:scaleType="fitCenter"
-                android:src="?attr/close"
+                android:src="@drawable/ic_close_white_24dp"
+
                 tools:ignore="RtlHardcoded"/>
+        <!--app:srcCompat="@drawable/ic_add"-->
+
     </FrameLayout>
 
 </FrameLayout>

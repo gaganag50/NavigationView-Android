@@ -6,18 +6,23 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.PreferenceFragmentCompat
+import android.util.Log
 import android.view.View
 
 
 abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
-    protected val TAG = javaClass.getSimpleName() + "@" + Integer.toHexString(hashCode())
+    //    protected val TAG = javaClass.getSimpleName() + "@" + Integer.toHexString(hashCode())
     protected val DEBUG = MainActivity.DEBUG
 
     protected lateinit var defaultPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        defaultPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity())
-        super.onCreate(savedInstanceState)
+        Log.d("MainActivity", "onCreate: of BasePF called")
+
+        defaultPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
+        Log.d("MainActivity", "onCreate: $savedInstanceState")
+
+            super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,7 +39,8 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
     private fun updateTitle() {
         if (getActivity() is AppCompatActivity) {
             val actionBar = (getActivity() as AppCompatActivity).supportActionBar
-            actionBar?.setTitle(getPreferenceScreen().getTitle())
+            actionBar?.title = preferenceScreen.title
         }
     }
+
 }

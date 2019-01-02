@@ -2,17 +2,21 @@ package com.gaganag50.myapplication
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v14.preference.PreferenceFragment
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.Preference
+import android.support.v7.preference.PreferenceFragmentCompat
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 
 
-class SettingsActivity : AppCompatActivity(), PreferenceFragment.OnPreferenceStartFragmentCallback {
+class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+
     companion object {
+        @JvmStatic
+
         fun initSettings(context: Context) {
             NewPipeSettings.initSettings(context)
         }
@@ -56,8 +60,12 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragment.OnPreferenceSta
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onPreferenceStartFragment(caller: PreferenceFragment?, preference: Preference?): Boolean {
-        val fragment = Fragment.instantiate(this, preference!!.getFragment(), preference.getExtras())
+    override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat?, preference: Preference?): Boolean {
+        Log.d("MainActivity", ": ononPreferenceStartFragment called" + caller.toString() + preference)
+
+        val fragment: Fragment = Fragment.instantiate(this, preference!!.getFragment(), preference.getExtras())
+        Log.d("MainActivity", "onPreferenceStartFragment: $fragment")
+
         getSupportFragmentManager().beginTransaction()
             .setCustomAnimations(
                 R.animator.custom_fade_in,
@@ -68,6 +76,8 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragment.OnPreferenceSta
             .replace(R.id.fragment_holder, fragment)
             .addToBackStack(null)
             .commit()
+        Log.d("MainActivity", "onPreferenceStartFragment: ends")
+
         return true
     }
 

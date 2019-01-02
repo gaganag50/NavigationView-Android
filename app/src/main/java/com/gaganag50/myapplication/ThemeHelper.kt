@@ -38,6 +38,31 @@ class ThemeHelper {
             return PreferenceManager.getDefaultSharedPreferences(context).getString(themeKey, defaultTheme)
         }
 
+        @StyleRes
+        fun getThemeForService(context: Context, serviceId: Int): Int {
+            val lightTheme = context.resources.getString(R.string.light_theme_key)
+            val darkTheme = context.resources.getString(R.string.dark_theme_key)
+            val blackTheme = context.resources.getString(R.string.black_theme_key)
+
+            val selectedTheme = getSelectedThemeString(context)
+
+            var defaultTheme = R.style.DarkTheme
+            if (selectedTheme == lightTheme)
+                defaultTheme = R.style.LightTheme
+            else if (selectedTheme == blackTheme)
+                defaultTheme = R.style.BlackTheme
+            else if (selectedTheme == darkTheme) defaultTheme = R.style.DarkTheme
+
+
+            return defaultTheme
+
+
+        }
+
+        fun setTheme(context: Context, serviceId: Int) {
+            context.setTheme(getThemeForService(context, serviceId))
+
+        }
     }
 
 }
